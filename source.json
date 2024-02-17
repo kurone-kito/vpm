@@ -1,28 +1,18 @@
 {
-    "name":"Example Listing",
-    "id":"com.vrchat.example-listing",
-    "url":"https://vrchat-community.github.io/template-package-listing/index.json",
-    "author":{
-        "email":"developer@vrchat.com",
-        "name":"VRChat",
-        "url":"https://hello.vrchat.com"
-    },
-    "description":"Example listing of VRChat packages",
-    "infoLink":{
-        "url":"http://github.com/vrchat-community/template-package-listing",
-        "text":"View on GitHub"
-    },
-    "bannerUrl":"banner.png",
-    "githubRepos":[
-        "vrchat-community/clientsim"
-    ],
-    "packages":[
-        {
-            "name":"com.vrchat.udonsharp",
-            "releases":[
-                "https://github.com/vrchat-community/UdonSharp/releases/download/1.1.7/com.vrchat.UdonSharp.zip",
-                "https://github.com/vrchat-community/UdonSharp/releases/download/1.1.6/com.vrchat.UdonSharp-1.1.6.zip"
-            ]
-        }
-    ]
+  "name": "Kuroné Kito (black.kit.*)",
+  "id": "black.kit.vpm-catalog",
+  "url": "https://kurone-kito.github.io/vpm/index.json",
+  "author": {
+    "email": "krone@kit.black",
+    "name": "VRChat",
+    "url": "https://kit.black/"
+  },
+  "description": "My VRChat packages",
+  "infoLink": {
+    "url": "http://github.com/kurone-kito/vpm",
+    "text": "View on GitHub"
+  },
+  "bannerUrl": "banner.png",
+  "githubRepos": ["kurone-kito/udonsharp-toybox", "kurone-kito/vrc-ui"],
+  "packages": []
 }

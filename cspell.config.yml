@@ -1,0 +1,21 @@
+allowCompoundWords: true
+dictionaries:
+  - cpp
+enableGlobDot: true
+features:
+  weighted-suggestions: true
+globRoot: ${cwd}
+id: kurone-kito
+language: en,ja
+ignorePaths:
+  - .*ignore
+  - .git
+  - .github/CODE_OF_CONDUCT.*
+  - .vscode/extensions.json
+  - cspell.config.yml
+words:
+  - kito
+  - kuroné
+  - udonsharp
+useGitignore: true
+version: '0.2'
