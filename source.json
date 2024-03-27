@@ -13,6 +13,10 @@
     "text": "View on GitHub"
   },
   "bannerUrl": "banner.png",
-  "githubRepos": ["kurone-kito/udonsharp-toybox", "kurone-kito/vrc-ui"],
+  "githubRepos": [
+    "kurone-kito/launchpad-icons",
+    "kurone-kito/udonsharp-toybox",
+    "kurone-kito/vrc-ui"
+  ],
   "packages": []
 }
