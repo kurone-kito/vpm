@@ -16,6 +16,7 @@ ignorePaths:
 words:
   - kito
   - kuroné
+  - scriban
   - udonsharp
 useGitignore: true
 version: '0.2'

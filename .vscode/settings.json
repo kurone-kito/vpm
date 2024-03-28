@@ -1,8 +1,8 @@
 {
   "git.branchProtection": ["main"],
   "yaml.schemas": {
-    "https://raw.githubusercontent.com/reviewpad/schemas/main/latest/schema.json": [
-      "reviewpad.yml"
+    "https://coderabbit.ai/integrations/coderabbit-overrides.v2.json": [
+      ".coderabbit.yaml"
     ],
     "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-types/cspell.schema.json": [
       "cspell.config.yml"
