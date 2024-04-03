@@ -1,4 +1,9 @@
-# 🐱 My VPM Packages
+# 🐱 [My VPM Packages](https://kurone-kito.github.io/vpm/)
+
+## Contributing
+
+Welcome to contribute to this repository! For more details,
+please refer to [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 ## License
 
