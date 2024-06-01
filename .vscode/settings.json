@@ -1,5 +1,6 @@
 {
   "files.associations": {
+    ".imgbotconfig": "json",
     "LICENSE": "plaintext"
   },
   "git.branchProtection": ["main"],
