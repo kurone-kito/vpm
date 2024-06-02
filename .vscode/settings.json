@@ -1,4 +1,8 @@
 {
+  "files.associations": {
+    ".imgbotconfig": "json",
+    "LICENSE": "plaintext"
+  },
   "git.branchProtection": ["main"],
   "yaml.schemas": {
     "https://coderabbit.ai/integrations/coderabbit-overrides.v2.json": [
