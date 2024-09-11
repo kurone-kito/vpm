@@ -5,7 +5,6 @@ enableGlobDot: true
 features:
   weighted-suggestions: true
 globRoot: ${cwd}
-id: kurone-kito
 language: en,ja
 ignorePaths:
   - .*ignore
