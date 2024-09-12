@@ -4,13 +4,13 @@ Language: **🇬🇧** | [🇯🇵](./CONTRIBUTING.ja.md) | [🇨🇳](./CONTRIB
 
 ---
 
-1. When contributing to this repository, please first discuss the change
-   you wish to make via [Issues](https://github.com/kurone-kito/vpm/issues)
-   or any other method with the owners of this repository before making a
-   change.
-2. Please note we have a [code of conduct](./CODE_OF_CONDUCT.md), please
+1. Please note we have a [code of conduct](./CODE_OF_CONDUCT.md), please
    follow it in all your interactions with the project.
-3. If your idea can be shown with a minor fix, please use directly the
-   [pull request](https://github.com/kurone-kito/vpm/pulls).
+2. When contributing to this repository,
+   please first discuss the change you wish to make via
+   [Issues](https://github.com/kurone-kito/vpm/issues) or any
+   other method with the owners of this repository before making a change.
+3. If your idea can be shown **with a minor fix, please use directly the
+   [pull request](https://github.com/kurone-kito/vpm/pulls)**.
 4. In this repository, discussion
-   [in English or Japanese](https://translate.google.com/) is recommended.
+   **[in English or Japanese](https://translate.google.com/) is recommended**.
