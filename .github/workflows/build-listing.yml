@@ -36,17 +36,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: vrchat-community/package-list-action
-          path: ${{env.pathToCi}}
+          path: ${{ env.pathToCi }}
           clean: false # otherwise the local repo will no longer be checked out
+      - name: Deploy the global.json file
+        run: cp "${{ github.workspace }}/global.json" "${{ env.pathToCi }}/"
       - name: Restore Cache
         uses: actions/cache@v4
         with:
           path: |
-            ${{env.pathToCi}}/.nuke/temp
+            ${{ env.pathToCi }}/.nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj') }}
       - name: Build Package Version Listing
-        run: ${{env.pathToCi}}/build.cmd BuildMultiPackageListing --root ${{env.pathToCi}} --list-publish-directory $GITHUB_WORKSPACE/${{env.listPublishDirectory}}
+        run: '"${{ env.pathToCi }}/build.cmd" BuildMultiPackageListing --root "${{ env.pathToCi }}" --list-publish-directory "$GITHUB_WORKSPACE/${{ env.listPublishDirectory }}"'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Pages
@@ -57,7 +59,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{env.listPublishDirectory}}
+          path: ${{ env.listPublishDirectory }}
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
