@@ -4,7 +4,8 @@
   "explorer.fileNesting.patterns": {
     "*.md": "${capture}.*.md",
     ".gitattributes": ".gitignore",
-    ".markdownlint.*": ".markdownlint-cli2.*"
+    ".markdownlint.*": ".markdownlint-cli2.*",
+    ".tool-versions": "global.json"
   },
   "files.associations": {
     ".imgbotconfig": "json",

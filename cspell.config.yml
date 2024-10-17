@@ -5,13 +5,13 @@ enableGlobDot: true
 features:
   weighted-suggestions: true
 globRoot: ${cwd}
-language: en,ja
 ignorePaths:
   - .*ignore
   - .git
   - .github/CODE_OF_CONDUCT.*
   - .vscode/extensions.json
   - cspell.config.yml
+language: en,ja
 useGitignore: true
 version: '0.2'
 words:
