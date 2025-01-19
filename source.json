@@ -1,22 +1,22 @@
 {
-  "name": "Kuroné Kito (black.kit.*)",
-  "id": "black.kit.vpm-catalog",
-  "url": "https://kurone-kito.github.io/vpm/index.json",
   "author": {
     "email": "krone@kit.black",
     "name": "Kuroné Kito",
     "url": "https://kit.black/"
   },
-  "description": "My VRChat packages",
-  "infoLink": {
-    "url": "http://github.com/kurone-kito/vpm",
-    "text": "View on GitHub"
-  },
   "bannerUrl": "banner.png",
+  "description": "My VRChat packages",
   "githubRepos": [
     "kurone-kito/launchpad-icons",
     "kurone-kito/udonsharp-toybox",
     "kurone-kito/vrc-ui"
   ],
-  "packages": []
+  "id": "black.kit.vpm-catalog",
+  "infoLink": {
+    "url": "http://github.com/kurone-kito/vpm",
+    "text": "View on GitHub"
+  },
+  "name": "Kuroné Kito (black.kit.*)",
+  "packages": [],
+  "url": "https://kurone-kito.github.io/vpm/index.json"
 }
