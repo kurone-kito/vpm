@@ -1,22 +1,16 @@
-allowCompoundWords: true
+cache:
+  cacheFormat: universal
+  cacheLocation: node_modules/.cache/cspell/.cspell.cache
+  cacheStrategy: metadata
+  useCache: true
 dictionaries:
   - cpp
-enableGlobDot: true
-features:
-  weighted-suggestions: true
-globRoot: ${cwd}
+import:
+  - '@kurone-kito/cspell-config'
 ignorePaths:
-  - .*ignore
-  - .git
-  - .github/CODE_OF_CONDUCT.*
-  - .vscode/extensions.json
-  - cspell.config.yml
-language: en,ja
-useGitignore: true
+  - node_modules
 version: '0.2'
 words:
-  - kito
-  - kuroné
   - scriban
   - udonsharp
   - vrchat
