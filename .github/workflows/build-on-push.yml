@@ -1,3 +1,6 @@
+env:
+  listPublishDirectory: Website
+  pathToCi: ci
 name: Build on push to feature branch for testing
 on:
   push:
@@ -6,9 +9,6 @@ on:
       - '!main'
 permissions:
   contents: read
-env:
-  listPublishDirectory: Website
-  pathToCi: ci
 jobs:
   build:
     name: Build the page
@@ -19,19 +19,19 @@ jobs:
       - name: Check out the automation repository
         uses: actions/checkout@v4
         with:
-          repository: vrchat-community/package-list-action
-          path: ${{ env.pathToCi }}
           clean: false # otherwise the local repo will no longer be checked out
+          path: ${{ env.pathToCi }}
+          repository: vrchat-community/package-list-action
       - name: Deploy the global.json file
         run: cp "${{ github.workspace }}/global.json" "${{ env.pathToCi }}/"
       - name: Restore Cache
         uses: actions/cache@v4
         with:
+          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj') }}
           path: |
             ${{ env.pathToCi }}/.nuke/temp
             ~/.nuget/packages
-          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj') }}
-      - name: Build Package Version Listing
-        run: '"${{ env.pathToCi }}/build.cmd" BuildMultiPackageListing --root "${{ env.pathToCi }}" --list-publish-directory "$GITHUB_WORKSPACE/${{ env.listPublishDirectory }}"'
-        env:
+      - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: Build Package Version Listing
+        run: '"${{ env.pathToCi }}/build.cmd" BuildMultiPackageListing --root "${{ env.pathToCi }}" --list-publish-directory "$GITHUB_WORKSPACE/${{ env.listPublishDirectory }}"'
