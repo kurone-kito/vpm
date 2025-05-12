@@ -52,6 +52,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         name: Build Package Version Listing
         run: '"${{ env.pathToCi }}/build.cmd" BuildMultiPackageListing --root "${{ env.pathToCi }}" --list-publish-directory "$GITHUB_WORKSPACE/${{ env.listPublishDirectory }}"'
+      - name: Upload website artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: website
+          path: ${{ env.listPublishDirectory }}
+          retention-days: 3
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
