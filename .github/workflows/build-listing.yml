@@ -12,6 +12,8 @@ on:
     paths:
       - source.json
   repository_dispatch:
+    types:
+      - build-listing
   workflow_dispatch:
 permissions: # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
   contents: read
@@ -35,6 +37,10 @@ jobs:
           repository: vrchat-community/package-list-action
       - name: Deploy the global.json file
         run: cp "${{ github.workspace }}/global.json" "${{ env.pathToCi }}/"
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
       - name: Restore Cache
         uses: actions/cache@v4
         with:
