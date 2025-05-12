@@ -1,6 +1,14 @@
 allowCompoundWords: true
 dictionaries:
   - cpp
+  - en_US
+  - en-gb
+  - eo
+  - git
+  - lorem-ipsum
+  - markdown
+  - misc
+  - softwareTerms
 enableGlobDot: true
 features:
   weighted-suggestions: true
@@ -11,10 +19,11 @@ ignorePaths:
   - .github/CODE_OF_CONDUCT.*
   - .vscode/extensions.json
   - cspell.config.yml
-language: en,ja
+language: en,eo,ja
 useGitignore: true
 version: '0.2'
 words:
+  - imgbotconfig
   - kito
   - kuroné
   - scriban
