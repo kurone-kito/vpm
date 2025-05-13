@@ -3,6 +3,14 @@ env:
   pathToCi: ci
 name: Build on push to feature branch for testing
 on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - '*'
+      - '!main'
   push:
     branches:
       - '*'
