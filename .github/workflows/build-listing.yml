@@ -20,44 +20,22 @@ permissions: # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHu
   id-token: write
   pages: write
 jobs:
-  build-listing:
-    name: build-listing
+  build:
+    name: Build the page
+    uses: ./.github/workflows/build-common.yml
+  deploy:
+    needs: build
+    name: Deploy to GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
-      - name: Check out the automation repository
-        uses: actions/checkout@v4
-        with:
-          clean: false # otherwise the local repo will no longer be checked out
-          path: ${{ env.pathToCi }}
-          repository: vrchat-community/package-list-action
-      - name: Deploy the global.json file
-        run: cp "${{ github.workspace }}/global.json" "${{ env.pathToCi }}/"
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: global.json
-      - name: Restore Cache
-        uses: actions/cache@v4
-        with:
-          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj') }}
-          path: |
-            ${{ env.pathToCi }}/.nuke/temp
-            ~/.nuget/packages
-      - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        name: Build Package Version Listing
-        run: '"${{ env.pathToCi }}/build.cmd" BuildMultiPackageListing --root "${{ env.pathToCi }}" --list-publish-directory "$GITHUB_WORKSPACE/${{ env.listPublishDirectory }}"'
-      - name: Upload website artifact
-        uses: actions/upload-artifact@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v3
         with:
           name: website
           path: ${{ env.listPublishDirectory }}
-          retention-days: 3
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
