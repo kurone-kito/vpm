@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{ listingInfo.Description }}" />
+    <meta property="og:title" content="{{ listingInfo.Name }}" />
+    <meta property="og:description" content="{{ listingInfo.Description }}" />
+    <meta property="og:url" content="{{ listingInfo.Url }}" />
+    {{~ if listingInfo.BannerImageUrl; ~}}
+    <meta property="og:image" content="{{ listingInfo.BannerImageUrl }}" />
+    {{~ end; ~}}
+    <meta property="og:type" content="website" />
     <title>VCC Listing</title>
     <script
       type="module"
