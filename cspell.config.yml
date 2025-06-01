@@ -23,6 +23,7 @@ language: en,eo,ja
 useGitignore: true
 version: '0.2'
 words:
+  - alcom
   - imgbotconfig
   - kito
   - kuroné

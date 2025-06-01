@@ -1,5 +1,8 @@
 # 🐱 [My VPM Packages](https://kurone-kito.github.io/vpm/)
 
+This registry can be used from both the VRChat Creator Companion (VCC) and
+ALCOM.
+
 ## Contributing
 
 Welcome to contribute to this repository! For more details,
