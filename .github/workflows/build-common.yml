@@ -1,0 +1,37 @@
+env:
+  listPublishDirectory: Website
+  pathToCi: ci
+name: Common Build
+on:
+  workflow_call:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+      - name: Check out the automation repository
+        uses: actions/checkout@v4
+        with:
+          repository: vrchat-community/package-list-action
+          path: ${{ env.pathToCi }}
+          clean: false # otherwise the local repo will no longer be checked out
+      - name: Deploy the global.json file
+        run: cp "${{ github.workspace }}/global.json" "${{ env.pathToCi }}/"
+      - name: Restore Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.pathToCi }}/.nuke/temp
+            ~/.nuget/packages
+          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj') }}
+      - name: Build Package Version Listing
+        run: '"${{ env.pathToCi }}/build.cmd" BuildMultiPackageListing --root "${{ env.pathToCi }}" --list-publish-directory "$GITHUB_WORKSPACE/${{ env.listPublishDirectory }}"'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload website artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: website
+          path: ${{ env.listPublishDirectory }}
+          retention-days: 3

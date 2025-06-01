@@ -1,7 +1,8 @@
 {
-  "recommendations": [
-    "editorconfig.editorconfig",
-    "redhat.vscode-yaml",
-    "streetsidesoftware.code-spell-checker"
-  ]
+	"recommendations": [
+		"davidanson.vscode-markdownlint",
+		"editorconfig.editorconfig",
+		"redhat.vscode-yaml",
+		"streetsidesoftware.code-spell-checker"
+	]
 }
