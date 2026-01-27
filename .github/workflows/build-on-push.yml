@@ -9,12 +9,12 @@ on:
       - reopened
       - synchronize
     branches:
-      - '*'
-      - '!main'
+      - "*"
+      - "!main"
   push:
     branches:
-      - '*'
-      - '!main'
+      - "*"
+      - "!main"
 permissions:
   contents: read
 jobs:
