@@ -1,6 +1,6 @@
 # Guidelines for AI Agents
 
-This project is a generic project template.
+This project is a registry for VPM packages used in VRChat.
 
 When contributing to this repository using AI agents, adhere to the
 following guidelines to ensure high-quality contributions that align with
@@ -11,3 +11,7 @@ the project's standards and practices:
   please point them out, even if they seem minor. When doing so, provide at
   least one recommended solution. If in Plan mode, resolve all these points
   before starting implementation.
+- `Website` folder contains the
+  [Scriban](https://github.com/scriban/scriban) templates for generating
+  the site. Familiarize yourself with Scriban syntax to effectively work
+  with these files.
