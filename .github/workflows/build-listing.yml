@@ -37,7 +37,7 @@ jobs:
           name: website
           path: ${{ env.listPublishDirectory }}
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
         with:
           enablement: true
           token: ${{ secrets.REPO_TOKEN }}
