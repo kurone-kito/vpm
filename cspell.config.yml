@@ -24,6 +24,7 @@ useGitignore: true
 version: '0.2'
 words:
   - alcom
+  - fluentui
   - imgbotconfig
   - kito
   - kuroné
