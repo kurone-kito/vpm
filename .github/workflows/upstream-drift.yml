@@ -113,8 +113,9 @@ jobs:
           BODYEOF
           )
 
-          existing=$(gh issue list --state open --search "vpm-upstream-drift in:body" \
-            --json number --jq '.[0].number // empty')
+          existing=$(gh issue list --state open --json number,body --limit 100 | jq -r \
+            --arg marker "$DRIFT_MARKER" \
+            '[.[] | select((.body // "") | contains($marker))] | .[0].number // empty')
 
           if [ -n "$existing" ]; then
             gh issue edit "$existing" --body "$body" --add-label "status:authoring"
