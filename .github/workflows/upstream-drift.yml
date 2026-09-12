@@ -1,0 +1,127 @@
+name: Detect upstream template drift
+
+on:
+  schedule:
+    - cron: '24 3 1 * *'
+  workflow_dispatch:
+    inputs:
+      baseline_sha:
+        description: >-
+          Upstream commit SHA to compare from, overriding the one recorded
+          in docs/upstream-sync.md
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  UPSTREAM_REPO: vrchat-community/template-package-listing
+  SYNC_DOC: docs/upstream-sync.md
+  DRIFT_MARKER: '<!-- vpm-upstream-drift -->'
+
+jobs:
+  detect-drift:
+    name: Detect upstream template drift
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve baseline and upstream head
+        id: resolve
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASELINE_INPUT: ${{ inputs.baseline_sha }}
+        run: |
+          if [ -n "$BASELINE_INPUT" ]; then
+            baseline="$BASELINE_INPUT"
+          else
+            baseline=$(awk \
+              '/^## Last synced upstream commit/{flag=1;next}/^## /{flag=0}flag' \
+              "$SYNC_DOC" | grep -oE '[0-9a-f]{40}' | head -n1)
+          fi
+
+          if [ -z "$baseline" ]; then
+            echo "::error::Could not parse an upstream commit SHA from $SYNC_DOC, and no baseline_sha input was given." >&2
+            exit 1
+          fi
+
+          head_sha=$(gh api "repos/$UPSTREAM_REPO/commits/HEAD" --jq '.sha')
+          if [ -z "$head_sha" ]; then
+            echo "::error::Could not resolve the HEAD commit of $UPSTREAM_REPO." >&2
+            exit 1
+          fi
+
+          echo "baseline=$baseline" >> "$GITHUB_OUTPUT"
+          echo "head=$head_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Compare against upstream
+        id: compare
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASELINE: ${{ steps.resolve.outputs.baseline }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head }}
+        run: |
+          compare=$(gh api "repos/$UPSTREAM_REPO/compare/${BASELINE}...${HEAD_SHA}")
+          ahead_by=$(echo "$compare" | jq -r '.ahead_by')
+          echo "ahead_by=$ahead_by" >> "$GITHUB_OUTPUT"
+
+          if [ "$ahead_by" = "0" ]; then
+            echo "Upstream has not moved past $BASELINE; nothing to do."
+            exit 0
+          fi
+
+          html_url=$(echo "$compare" | jq -r '.html_url')
+          commit_list=$(echo "$compare" | jq -r \
+            '.commits[] | "- `\(.sha[0:7])` (\(.commit.author.date | split("T")[0])) — \(.commit.message | split("\n")[0])"')
+
+          echo "html_url=$html_url" >> "$GITHUB_OUTPUT"
+          {
+            echo "commit_list<<DRIFT_COMMIT_LIST_EOF"
+            echo "$commit_list"
+            echo "DRIFT_COMMIT_LIST_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: File or update drift issue
+        if: steps.compare.outputs.ahead_by != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASELINE: ${{ steps.resolve.outputs.baseline }}
+          HTML_URL: ${{ steps.compare.outputs.html_url }}
+          COMMIT_LIST: ${{ steps.compare.outputs.commit_list }}
+        run: |
+          body=$(cat <<BODYEOF
+          $DRIFT_MARKER
+
+          The upstream template [\`$UPSTREAM_REPO\`](https://github.com/$UPSTREAM_REPO)
+          has moved past the commit recorded in \`$SYNC_DOC\` (\`$BASELINE\`).
+
+          New commits since \`$BASELINE\`:
+
+          $COMMIT_LIST
+
+          Compare: $HTML_URL
+
+          This issue was filed automatically by
+          \`.github/workflows/upstream-drift.yml\`. It carries
+          \`status:authoring\` and is not autopilot-eligible; a human must
+          triage it into a real, specified issue (updating
+          \`$SYNC_DOC\` only happens as the reviewed outcome of actually
+          importing the change).
+          BODYEOF
+          )
+
+          existing=$(gh issue list --state open --search "vpm-upstream-drift in:body" \
+            --json number --jq '.[0].number // empty')
+
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body "$body" --add-label "status:authoring"
+            echo "Updated existing drift issue #$existing"
+          else
+            gh issue create \
+              --title "Upstream template drift detected ($UPSTREAM_REPO)" \
+              --body "$body" \
+              --label "status:authoring"
+          fi
