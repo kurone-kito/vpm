@@ -34,6 +34,10 @@ is published via GitHub Pages.
 
 The build will move to a *Node.js implementation in the future*.
 
+This repository was created from an upstream template; see
+[docs/upstream-sync.md](docs/upstream-sync.md) for the sync lineage and
+diff procedure.
+
 ## License
 
 This repository is licensed under the [MIT License](LICENSE).
