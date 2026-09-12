@@ -74,8 +74,10 @@ jobs:
           fi
 
           html_url=$(echo "$compare" | jq -r '.html_url')
-          commit_list=$(echo "$compare" | jq -r \
-            '.commits[] | "- `\(.sha[0:7])` (\(.commit.author.date | split("T")[0])) — \(.commit.message | split("\n")[0])"')
+          commit_list=$(echo "$compare" | jq -r --arg repo "$UPSTREAM_REPO" '
+            .commits[] |
+            (.commit.message | split("\n")[0] | gsub("#(?<n>[0-9]+)"; "\($repo)#\(.n)")) as $subject |
+            "- `\(.sha[0:7])` (\(.commit.author.date | split("T")[0])) — \($subject)"')
 
           echo "html_url=$html_url" >> "$GITHUB_OUTPUT"
           {
