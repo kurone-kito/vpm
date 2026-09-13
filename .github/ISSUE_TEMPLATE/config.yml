@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🇺🇸🇬🇧 Contributing guide
+    url: https://github.com/kurone-kito/vpm/blob/main/.github/CONTRIBUTING.md
+    about: Please read this before filing an issue.
+  - name: 🇯🇵 コントリビューションガイド
+    url: https://github.com/kurone-kito/vpm/blob/main/.github/CONTRIBUTING.ja.md
+    about: 投稿の前に一読ください。
+  - name: 🇨🇳 贡献指南
+    url: https://github.com/kurone-kito/vpm/blob/main/.github/CONTRIBUTING.zh.md
+    about: 提交前请先阅读。
