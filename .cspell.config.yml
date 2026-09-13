@@ -1,0 +1,14 @@
+import:
+  - '@kurone-kito/cspell-config'
+language: en,eo,ja
+dictionaries:
+  - markdown
+  - misc
+words:
+  - alcom
+  - fluentui
+  - gsub
+  - imgbotconfig
+  - scriban
+  - udonsharp
+  - vrchat

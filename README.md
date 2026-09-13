@@ -34,6 +34,16 @@ is published via GitHub Pages.
 
 The build will move to a *Node.js implementation in the future*.
 
+Linting requires Node.js&nbsp;24 (Krypton) and pnpm; both are pinned in
+[`.node-version`](.node-version)/[`.tool-versions`](.tool-versions) and
+[`package.json`](package.json). Install and run it with:
+
+```bash
+corepack enable
+pnpm install
+pnpm run lint
+```
+
 This repository was created from an upstream template; see
 [docs/upstream-sync.md](docs/upstream-sync.md) for the sync lineage and
 diff procedure.

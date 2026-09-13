@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["./node_modules/@kurone-kito/biome-config/biome.json"],
+  // Website/** contains Scriban templates (see .coderabbit.yaml), not
+  // hand-authored source -- biome's a11y/HTML rules do not apply to it.
+  "files": {
+    "includes": ["!Website"]
+  }
+}
