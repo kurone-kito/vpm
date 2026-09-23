@@ -26,6 +26,30 @@ When contributing to this repository using AI agents, adhere to the
 following guidelines to ensure high-quality contributions that align
 with the project's standards and practices:
 
+## IDD workflow
+
+This project uses Issue-Driven Development (IDD) with parallel AI agents.
+Start with [docs/idd-workflow.md](docs/idd-workflow.md) for the
+cross-agent entry path and phase routing, and read
+[docs/idd-policy.md](docs/idd-policy.md) for this repository's recorded
+policy decisions (merge policy, review policy, claim timing, helper
+runtime, and the rest).
+
+Before starting IDD work, open
+`.github/instructions/idd-overview-core.instructions.md`. Open the routed
+phase file manually when the current step changes.
+
+Doing ad-hoc engineering outside a formal IDD claim (a direct fix, a PR,
+a review reply)? The "Wake-up discipline" section of
+`.github/instructions/idd-ci.instructions.md` (no self-polling while
+waiting on CI or bot review) still applies — open it whenever a commit
+you pushed is waiting on either.
+
+The recorded helper runtime profile is `package-manager`: invoke the IDD
+helpers through this repository's `idd:*` package scripts, for example
+`pnpm run idd:doctor`, which resolve to the pinned
+`@kurone-kito/idd-skill` devDependency.
+
 ## Conversation
 
 - The conversational language should match the user's language.
