@@ -169,10 +169,69 @@ defect. Reconcile them by hand rather than with `--force`.
 
 ### Optional fields deliberately absent
 
-`provider`, `labels.untrustedLabelerLogins`, `critiqueLoop.telemetryHook`,
-`upstreamEscalation.enabled`, `ciGate.externalChecks`, and
-`ciGate.externalCheckWaivers`. The last two are covered by the follow-up
-issue [#43](https://github.com/kurone-kito/vpm/issues/43).
+`provider`, `labels.untrustedLabelerLogins`,
+`critiqueLoop.telemetryHook`, and `upstreamEscalation.enabled` — no
+evidence in this repository requires them.
+
+### Advisory-convergence required check
+
+`.github/workflows/idd-advisory-convergence.yml` and its non-required
+comment companion are hosted from the pinned import, with three local
+adjustments: every action reference is pinned to a full commit SHA
+(these workflows are privileged — `pull_request_target`, and the
+companion also holds `actions: write` — so they must not depend on code
+a publisher can move under a floating tag), the package-manager install
+steps carry the same `HUSKY` / virtual-store environment
+`.github/workflows/lint.yml` needs, and the gate's untrusted
+`pull_request` trigger is dropped (see below).
+The self-waiver job keeps its shipped `pull-requests: write` and
+`issues: write` permissions, which it needs to post its waiver marker.
+The runner comes from the `CI_RUNNER_LABEL` repository variable rather
+than a hand-edited `runs-on`.
+
+Exactly one job id, `idd-advisory-convergence`, is the intended required
+status check on `main`; the comment companion is a non-required refresh.
+The rule leaves the strict up-to-date-head policy **disabled**, matching
+the confirmed hearing decision, and names no producer integration, so any
+source may publish the check — `ciGate.trustSourcePinnedRequiredChecks`
+therefore stays absent. Because the rule cannot distinguish producers,
+the gate workflow drops the template's untrusted `pull_request` trigger
+and runs only from `pull_request_target`, whose definition comes from the
+base branch; the consequence is that the gate publishes no verdict for
+the pull request that introduces it.
+
+`.github/CODEOWNERS` protects `/.github/workflows/` as a whole — not just
+the gate's own file, since an unpinned required check would otherwise
+accept the same check name published by any other workflow — plus the
+CODEOWNERS file itself, with the entries placed after the broad `*` rule
+because CODEOWNERS applies the last matching rule.
+
+**Code Owner review is deliberately not enforced.** The upstream guidance
+pairs this ownership with GitHub's *Require review from Code Owners* and
+*Dismiss stale pull request approvals*; both are declined here, because
+this repository has exactly one collaborator — the owner, who is also the
+author of every autonomous pull request — and GitHub never counts an
+author's own approval. Enabling them would stop the `fully_autonomous_merge`
+loop outright rather than add a real second pair of eyes. The residual
+risk is therefore explicit: the effective trust boundary for publishing
+this check is the repository owner's own credentials, which is already
+the trust boundary for merging. Revisit this the moment a second
+collaborator gains write access.
+
+`ciGate.externalChecks.waivable` names that one check with an exact
+selector, and `ciGate.externalCheckWaivers` records the
+`maintainer-authorized` mode, an `owners-and-maintainers-only` authority
+policy, and a `PT24H` maximum validity — the same shape upstream uses.
+
+Known accepted exposure, tracked upstream rather than fork-fixed here:
+the gate's own self-waiver job posts a self-referential bootstrap marker
+when a pull request touches its allowlisted files, and for the
+`package-manager` profile that allowlist includes `package.json` and the
+lockfile. A dependency-only pull request — a Dependabot bump, for
+instance — can therefore auto-waive this one advisory check without an
+active claim. The exposure is bounded to `idd-advisory-convergence`: the
+repository's other checks, the `main` ruleset, and the Copilot review
+requirement are unaffected.
 
 ### Worktree guard
 
