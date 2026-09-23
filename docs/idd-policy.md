@@ -62,7 +62,7 @@ provisioned.`
 
 ### Issue-Authoring Companion
 
-**Status**: `not installed`
+**Status**: `installed`
 
 ### Helper Runtime Profile
 
@@ -170,22 +170,41 @@ defect. Reconcile them by hand rather than with `--force`.
 ### Optional fields deliberately absent
 
 `provider`, `labels.untrustedLabelerLogins`, `critiqueLoop.telemetryHook`,
-`issueAuthoring.journalIssue`, `upstreamEscalation.enabled`,
-`worktreeGuard`, `ciGate.externalChecks`, and
-`ciGate.externalCheckWaivers`. The last three, plus the issue-authoring
-and `idd-spec-audit` companions, are covered by the follow-up issues
-[#40](https://github.com/kurone-kito/vpm/issues/40),
-[#41](https://github.com/kurone-kito/vpm/issues/41),
+`upstreamEscalation.enabled`, `worktreeGuard`, `ciGate.externalChecks`,
+and `ciGate.externalCheckWaivers`. The last three are covered by the
+follow-up issues [#41](https://github.com/kurone-kito/vpm/issues/41),
 [#42](https://github.com/kurone-kito/vpm/issues/42), and
 [#43](https://github.com/kurone-kito/vpm/issues/43).
 
 ### Companion status
 
-The generated section above records the issue-authoring companion as
-`not installed`, which is what the issue-mediated bootstrap path requires
-the core import to record. The operator's confirmed target state is
-`installed` under `.claude/skills/`; issue #40 installs both companions
-and updates that recorded value.
+Both optional companions are installed under `.claude/skills/`, the one
+native skill root selected during the hearing — never duplicated into a
+second runtime root:
+
+- `issue-authoring` (4 files) drafts and refines IDD-ready issues,
+  roadmaps and sub-issues before execution starts. It does not authorize
+  publishing, editing issues, or starting the loop on its own.
+- `idd-spec-audit` (2 files) is read-only: it audits the installed
+  instruction corpus for semantic drift and routes findings back through
+  the issue-authoring flow. It never edits files or mutates issues.
+
+Both bundles are byte-identical to their sources at the pinned commit and
+are prefix-agnostic by contract — they resolve this repository's marker
+prefix at drafting time — so they carry no substitutions and a re-import
+stays a clean file comparison.
+
+The core import recorded this status as `not installed`, which is what
+the issue-mediated bootstrap path requires of the bootstrap issue itself;
+issue #40 installed the files and updated the value.
+
+`issueAuthoring.journalIssue` names
+[#45](https://github.com/kurone-kito/vpm/issues/45), a closed,
+`documentation`-labeled, comment-only infrastructure issue. A standalone
+authoring set — one with no pre-existing anchor issue to hold its
+publication-intent records — stops with `blocked-by-human` when that
+field is unset, and the journal is deliberately closed so Discover can
+never route it as work.
 
 ### Repository-specific reviewer guidance
 
