@@ -1,1 +1,7 @@
 * @kurone-kito
+
+# Protect the required-check workflow definition and this file itself.
+# CODEOWNERS applies the last matching rule, so these stay below the
+# broad rule above.
+/.github/workflows/idd-advisory-convergence.yml @kurone-kito
+/.github/CODEOWNERS @kurone-kito
