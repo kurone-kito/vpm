@@ -169,10 +169,37 @@ defect. Reconcile them by hand rather than with `--force`.
 
 ### Optional fields deliberately absent
 
-`provider`, `labels.untrustedLabelerLogins`, `critiqueLoop.telemetryHook`,
-`upstreamEscalation.enabled`, `ciGate.externalChecks`, and
-`ciGate.externalCheckWaivers`. The last two are covered by the follow-up
-issue [#43](https://github.com/kurone-kito/vpm/issues/43).
+`provider`, `labels.untrustedLabelerLogins`,
+`critiqueLoop.telemetryHook`, and `upstreamEscalation.enabled` — no
+evidence in this repository requires them.
+
+### Advisory-convergence required check
+
+`.github/workflows/idd-advisory-convergence.yml` and its non-required
+comment companion are hosted from the pinned import, with two local
+adjustments: `actions/checkout` follows this repository's `@v7`
+convention, and the package-manager install steps carry the same
+`HUSKY` / virtual-store environment `.github/workflows/lint.yml` needs.
+The self-waiver job keeps its shipped `pull-requests: write` and
+`issues: write` permissions, which it needs to post its waiver marker.
+The runner comes from the `CI_RUNNER_LABEL` repository variable rather
+than a hand-edited `runs-on`.
+
+Exactly one job id, `idd-advisory-convergence`, is registered as a
+required status check on `main`; the comment companion is a non-required
+refresh. The rule leaves the strict up-to-date-head policy **disabled**,
+matching the confirmed hearing decision, and names no producer
+integration, so any source may publish the check —
+`ciGate.trustSourcePinnedRequiredChecks` therefore stays absent.
+
+`.github/CODEOWNERS` protects both the workflow definition and the
+CODEOWNERS file itself, with the entries placed after the broad `*` rule
+because CODEOWNERS applies the last matching rule.
+
+`ciGate.externalChecks.waivable` names that one check with an exact
+selector, and `ciGate.externalCheckWaivers` records the
+`maintainer-authorized` mode, an `owners-and-maintainers-only` authority
+policy, and a `PT24H` maximum validity — the same shape upstream uses.
 
 ### Worktree guard
 
