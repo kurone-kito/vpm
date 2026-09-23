@@ -3,3 +3,5 @@
 # vim: set ft=sh :
 
 pnpm exec lint-staged -r
+
+exec "$(git rev-parse --show-toplevel)/.githooks/pre-commit" "$@"

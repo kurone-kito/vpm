@@ -1,0 +1,5 @@
+#!/bin/sh
+# -*- mode: sh -*-
+# vim: set ft=sh :
+
+exec "$(git rev-parse --show-toplevel)/.githooks/pre-push" "$@"
