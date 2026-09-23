@@ -38,9 +38,8 @@ permanent differences from the upstream template:
 
 ## Upstream commits already resolved
 
-Commits between the previous sync and `f249c6fda149e593b1c29c2d01264bed04a8008f`
-that needed no import, so they should not be re-evaluated on the next
-sync:
+Commits already triaged across prior syncs, so they should not be
+re-evaluated on the next sync:
 
 - `1dd2a82` (2026-06-30, "Pin @fluentui/web-components CDN imports to
   v2.6.1") — imported by this change.
