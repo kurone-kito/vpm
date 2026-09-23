@@ -199,8 +199,11 @@ the rule cannot distinguish producers, the gate workflow drops the
 template's untrusted `pull_request` trigger and runs only from
 `pull_request_target`, whose definition comes from the base branch; the
 consequence is that the gate published no verdict for the pull request
-that introduced it, and the first live verdict lands on the first pull
-request opened afterwards.
+that introduced it. The first live verdict landed on pull request #55
+and concluded `failure`, because Copilot had not yet reviewed that
+pull request when the check first ran; the same gap recurred on each
+of pull requests #56 and #57's own first run too, and each time a
+rerun after Copilot's review landed turned it `success`.
 
 Verify the registered rule with:
 
