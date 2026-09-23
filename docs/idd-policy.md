@@ -200,9 +200,23 @@ and runs only from `pull_request_target`, whose definition comes from the
 base branch; the consequence is that the gate publishes no verdict for
 the pull request that introduces it.
 
-`.github/CODEOWNERS` protects both the workflow definition and the
+`.github/CODEOWNERS` protects `/.github/workflows/` as a whole — not just
+the gate's own file, since an unpinned required check would otherwise
+accept the same check name published by any other workflow — plus the
 CODEOWNERS file itself, with the entries placed after the broad `*` rule
 because CODEOWNERS applies the last matching rule.
+
+**Code Owner review is deliberately not enforced.** The upstream guidance
+pairs this ownership with GitHub's *Require review from Code Owners* and
+*Dismiss stale pull request approvals*; both are declined here, because
+this repository has exactly one collaborator — the owner, who is also the
+author of every autonomous pull request — and GitHub never counts an
+author's own approval. Enabling them would stop the `fully_autonomous_merge`
+loop outright rather than add a real second pair of eyes. The residual
+risk is therefore explicit: the effective trust boundary for publishing
+this check is the repository owner's own credentials, which is already
+the trust boundary for merging. Revisit this the moment a second
+collaborator gains write access.
 
 `ciGate.externalChecks.waivable` names that one check with an exact
 selector, and `ciGate.externalCheckWaivers` records the

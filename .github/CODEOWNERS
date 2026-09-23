@@ -1,7 +1,8 @@
 * @kurone-kito
 
-# Protect the required-check workflow definition and this file itself.
-# CODEOWNERS applies the last matching rule, so these stay below the
-# broad rule above.
-/.github/workflows/idd-advisory-convergence.yml @kurone-kito
+# Protect every workflow definition and this file itself. The required
+# check names no producer integration, so a single-file rule would not
+# stop another workflow from publishing the same check name. CODEOWNERS
+# applies the last matching rule, so these stay below the broad rule.
+/.github/workflows/ @kurone-kito
 /.github/CODEOWNERS @kurone-kito
