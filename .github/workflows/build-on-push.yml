@@ -1,7 +1,9 @@
 env:
   listPublishDirectory: Website
   pathToCi: ci
-name: Build on push to feature branch for testing
+name: Build on pull request targeting main for testing
+# Runs only for pull requests targeting main; there is no separate
+# push-triggered path.
 on:
   pull_request:
     types:
@@ -9,12 +11,7 @@ on:
       - reopened
       - synchronize
     branches:
-      - '*'
-      - '!main'
-  push:
-    branches:
-      - '*'
-      - '!main'
+      - main
 permissions:
   contents: read
 jobs:
