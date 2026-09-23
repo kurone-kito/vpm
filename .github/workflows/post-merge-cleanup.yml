@@ -287,8 +287,15 @@ jobs:
           echo "manager=$MANAGER" >> "$GITHUB_OUTPUT"
       - name: Install dependencies (package-manager profile)
         if: steps.profile.outputs.profile == 'package-manager' && steps.manager.outputs.manager != 'ambiguous'
+        # Local adaptation (not upstream): this repository's own CI install
+        # convention, mirroring .github/workflows/lint.yml. HUSKY=0 keeps the
+        # `prepare` lifecycle from wiring git hooks on a throwaway runner, and
+        # the virtual-store override replaces pnpm-workspace.yaml's
+        # `virtualStoreType: global`, which has no shared store here.
         env:
+          HUSKY: 0
           MANAGER: ${{ steps.manager.outputs.manager }}
+          PNPM_CONFIG_VIRTUAL_STORE_TYPE: project
         run: |
           case "$MANAGER" in
             pnpm)
