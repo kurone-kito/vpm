@@ -1,0 +1,8 @@
+paths:
+  .github/workflows/idd-advisory-convergence.yml:
+    ignore:
+      # Style-only shellcheck suggestion (SC2129) inside a case/esac
+      # block where each branch runs its own single `tee` command, not a
+      # real sequence of repeated appends; left as-is to avoid touching
+      # this security/automation-sensitive script for issue #58's scope.
+      - 'shellcheck reported issue in this script: SC2129:.+'
