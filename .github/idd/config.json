@@ -29,6 +29,9 @@
   "issueScope": "roadmap-first",
   "orphanFirstPolicy": "none",
   "maintainerApprovalActorPolicy": "owners-and-maintainers-only",
+  "issueAuthoring": {
+    "journalIssue": "kurone-kito/vpm#45"
+  },
   "advisoryWait": {
     "convergenceScope": "idd-claimed",
     "convergenceDeadline": "PT9H",
