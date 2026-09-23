@@ -4,11 +4,51 @@ language: en,eo,ja
 dictionaries:
   - markdown
   - misc
+  - shellscript
 words:
   - alcom
+  - dedup
+  - deprioritize
+  - desync
+  - desynced
+  - dofork
+  - Esync
   - fluentui
+  - GHEC
+  - GHES
   - gsub
+  - idd
   - imgbotconfig
+  - isort
+  - Kiro
+  - kito
+  - kuron
+  - kurone
+  - kuroné
+  - minimizable
+  - ministral
+  - nektos
+  - nvmrc
+  - ONNX
+  - pylint
+  - pyproject
+  - pytest
+  - qwen
+  - remediations
+  - rollup
   - scriban
+  - TOCTOU
+  - tsfile
   - udonsharp
+  - undispositioned
+  - unioned
+  - unmigrated
+  - unmirrored
+  - unpushed
+  - unreplied
+  - unrouted
+  - unscored
+  - unwaived
   - vrchat
+  - waivable
+  - WHATWG
