@@ -8,7 +8,7 @@ in git history — this document is that record.
 
 ## Last synced upstream commit
 
-`f249c6fda149e593b1c29c2d01264bed04a8008f` (2026-07-01).
+`0c6013555c9566a1658320e5495576f48a4424a0` (2026-09-01).
 
 ## Diff procedure
 
@@ -53,6 +53,9 @@ sync:
   — already applied; see `Website/index.html`.
 - `83a6950` and `3f6f64a` (upstream README link polish) — not
   applicable; this repository's `README.md` is fully rewritten.
+- `d218b20` (set head title to use the listing name) and `592db45`
+  (add favicon link to `index.html`), merged as `0c60135` — imported by
+  this change.
 
 ## Automated drift detection
 
