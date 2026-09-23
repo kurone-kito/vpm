@@ -1,0 +1,57 @@
+{
+  "$schema": "https://kurone-kito.github.io/idd-skill/schemas/policy.schema.json",
+  "iddVersion": "0.12.2",
+  "markerPrefix": "vpm",
+  "developmentBranch": "main",
+  "mergePolicy": "fully_autonomous_merge",
+  "mergePolicyAck": "fully_autonomous_merge",
+  "reviewPolicy": "copilot-advisory",
+  "threadResolutionPolicy": "fast-agent-resolve",
+  "claimTiming": {
+    "staleAge": "PT24H",
+    "heartbeatInterval": "PT12H"
+  },
+  "trustedMarkerActors": ["kurone-kito"],
+  "advisoryBotLogins": ["coderabbitai[bot]"],
+  "workshop": {
+    "exampleRepository": ""
+  },
+  "commands": {
+    "install-deps": "pnpm install",
+    "fix-validate": "pnpm run lint:fix && pnpm run lint",
+    "pre-push-validate": "pnpm run lint && pnpm run test",
+    "post-fix-validate": "pnpm run lint:fix && pnpm run lint && pnpm run test"
+  },
+  "helperRuntime": {
+    "profile": "package-manager",
+    "packageSpec": "github:kurone-kito/idd-skill#993faefff820cbe032271775791d3d308a805347"
+  },
+  "issueScope": "roadmap-first",
+  "orphanFirstPolicy": "none",
+  "maintainerApprovalActorPolicy": "owners-and-maintainers-only",
+  "advisoryWait": {
+    "convergenceScope": "idd-claimed",
+    "convergenceDeadline": "PT9H",
+    "secondaryBotLogin": "coderabbitai[bot]",
+    "secondaryQuietWindow": "PT1H"
+  },
+  "ciWait": {
+    "rerunPolicy": "rerun-once"
+  },
+  "ciGate": {
+    "trustEmptyProtectionReads": true
+  },
+  "discover": {
+    "selectionDesync": "session-offset"
+  },
+  "critiqueLoop": {
+    "deferAfterRounds": 5
+  },
+  "forcedHandoff": {
+    "mode": "human-gated",
+    "authorityPolicy": "owners-and-maintainers-only"
+  },
+  "autopilotSuitability": {
+    "floor": 3
+  }
+}

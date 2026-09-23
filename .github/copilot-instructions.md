@@ -17,5 +17,16 @@ Read that file first if you haven't already.
   treat it as broken source solely because of that syntax — see
   `.coderabbit.yaml`'s path instruction for the same note.
 
+## IDD workflow
+
+This repository runs Issue-Driven Development (IDD) with parallel AI
+agents. Start from [docs/idd-workflow.md](../docs/idd-workflow.md) for the
+cross-agent entry path and phase routing, and read
+[docs/idd-policy.md](../docs/idd-policy.md) for the recorded policy
+decisions. Open `.github/instructions/idd-overview-core.instructions.md`
+before starting IDD work; that file keeps its `excludeAgent:
+"code-review"` scoping, so this repository-wide Copilot guidance still
+applies to reviews.
+
 See [docs/ai-strategy.md](../docs/ai-strategy.md) for why this repository's
 AI instructions are laid out this way.
