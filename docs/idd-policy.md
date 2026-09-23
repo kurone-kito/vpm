@@ -189,16 +189,28 @@ The self-waiver job keeps its shipped `pull-requests: write` and
 The runner comes from the `CI_RUNNER_LABEL` repository variable rather
 than a hand-edited `runs-on`.
 
-Exactly one job id, `idd-advisory-convergence`, is the intended required
-status check on `main`; the comment companion is a non-required refresh.
-The rule leaves the strict up-to-date-head policy **disabled**, matching
-the confirmed hearing decision, and names no producer integration, so any
-source may publish the check — `ciGate.trustSourcePinnedRequiredChecks`
-therefore stays absent. Because the rule cannot distinguish producers,
-the gate workflow drops the template's untrusted `pull_request` trigger
-and runs only from `pull_request_target`, whose definition comes from the
-base branch; the consequence is that the gate publishes no verdict for
-the pull request that introduces it.
+Exactly one job id, `idd-advisory-convergence`, is **registered** as a
+required status check on the `main` ruleset; the comment companion is a
+non-required refresh. The rule leaves the strict up-to-date-head policy
+**disabled**, matching the confirmed hearing decision, and names no
+producer integration, so any source may publish the check —
+`ciGate.trustSourcePinnedRequiredChecks` therefore stays absent. Because
+the rule cannot distinguish producers, the gate workflow drops the
+template's untrusted `pull_request` trigger and runs only from
+`pull_request_target`, whose definition comes from the base branch; the
+consequence is that the gate published no verdict for the pull request
+that introduced it. The first live verdict landed on pull request #55
+and concluded `failure`, because Copilot had not yet reviewed that
+pull request when the check first ran; the same gap recurred on each
+of pull requests #56 and #57's own first run too, and each time a
+rerun after Copilot's review landed turned it `success`.
+
+Verify the registered rule with:
+
+```sh
+gh api repos/kurone-kito/vpm/rulesets/20749125 \
+  --jq '[.rules[] | select(.type == "required_status_checks")]'
+```
 
 `.github/CODEOWNERS` protects `/.github/workflows/` as a whole — not just
 the gate's own file, since an unpinned required check would otherwise
