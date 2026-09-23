@@ -110,9 +110,22 @@ leftover placeholder tokens, and this file is not on its skip list.
 
 ### Validation commands
 
+The `package-manager` profile installs the helper *bins* but not
+`idd-onboard.mjs` itself, which ships only in the upstream source tree.
+Set `$CLONE_DIR` to a checkout of `kurone-kito/idd-skill` at the pinned
+commit above and `$TARGET_REPO` to this repository, then run the
+onboarding verifier from that clone:
+
 ```sh
-node scripts/idd-onboard.mjs --verify --source "$CLONE_DIR" \
-  --target "$TARGET_REPO" --allow-root "$TARGET_REPO"
+node "$CLONE_DIR/scripts/idd-onboard.mjs" --verify \
+  --source "$CLONE_DIR" --target "$TARGET_REPO" \
+  --allow-root "$TARGET_REPO"
+```
+
+The remaining checks run from this repository, through the installed
+helper bins and its own lint suite:
+
+```sh
 pnpm install --frozen-lockfile
 pnpm run idd:doctor
 pnpm run lint
