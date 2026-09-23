@@ -15,7 +15,7 @@ in git history — this document is that record.
 ```bash
 git remote add upstream https://github.com/vrchat-community/template-package-listing.git
 git fetch upstream
-git log f249c6fda149e593b1c29c2d01264bed04a8008f..upstream/main
+git log 0c6013555c9566a1658320e5495576f48a4424a0..upstream/main
 ```
 
 Update the "Last synced upstream commit" section above once the
