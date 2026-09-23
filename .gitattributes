@@ -5,3 +5,8 @@
 .imgbotconfig export-ignore
 
 pnpm-lock.yaml linguist-vendored
+
+# The IDD worktree-guard hooks are POSIX sh and ship without a file
+# extension, so a `*.sh` rule would miss pre-commit/pre-push. A CRLF
+# checkout breaks the line that loads _idd-worktree-guard.sh.
+.githooks/* text eol=lf
