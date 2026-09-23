@@ -170,11 +170,20 @@ defect. Reconcile them by hand rather than with `--force`.
 ### Optional fields deliberately absent
 
 `provider`, `labels.untrustedLabelerLogins`, `critiqueLoop.telemetryHook`,
-`upstreamEscalation.enabled`, `worktreeGuard`, `ciGate.externalChecks`,
-and `ciGate.externalCheckWaivers`. The last three are covered by the
-follow-up issues [#41](https://github.com/kurone-kito/vpm/issues/41),
-[#42](https://github.com/kurone-kito/vpm/issues/42), and
-[#43](https://github.com/kurone-kito/vpm/issues/43).
+`upstreamEscalation.enabled`, `ciGate.externalChecks`, and
+`ciGate.externalCheckWaivers`. The last two are covered by the follow-up
+issue [#43](https://github.com/kurone-kito/vpm/issues/43).
+
+### Worktree guard
+
+`worktreeGuard.enabled` is `true`. This repository uses husky, which
+claims `core.hooksPath` on every `prepare` lifecycle run, so the guard is
+**chained** from `.husky/pre-commit` and `.husky/pre-push` into
+`.githooks/*` rather than repointing `core.hooksPath` at `.githooks`
+directly — repointing it would both bypass husky and be reverted by the
+next `pnpm install`. `.gitattributes` pins the shipped hook files to LF,
+since they have no file extension and a CRLF checkout would break the
+line that loads `_idd-worktree-guard.sh`.
 
 ### Companion status
 
