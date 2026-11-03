@@ -17,7 +17,7 @@ jobs:
       - name: Checks out the source
         uses: actions/checkout@v7
       - name: Run actionlint
-        uses: reviewdog/action-actionlint@2085657ab2c7f48c58edcc767fba576f63bea76b # v1.77.0
+        uses: reviewdog/action-actionlint@5d802a8ebdcb24d712925118c3a4596f571d8fcd # v1.81.0
         with:
           fail_level: error
           filter_mode: nofilter
@@ -27,7 +27,7 @@ jobs:
         with:
           run_install: false
       - name: Prepare the Node.js environment
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
           cache: pnpm
           node-version-file: .node-version
